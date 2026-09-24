@@ -1,36 +1,168 @@
-# Cross-Lingual Transfer of Media Bias Detection: Testing MAGPIE on German News
+# Zero-Shot Cross-Lingual Media Bias Detection: Applying MAGPIE to German News at the Article Level
 
-MSc thesis project by Yashkumar Vala, MSc Data Science, AI, and Digital Business, GISMA University of Applied Sciences.
-Supervisor: Prof. William Baker Morrison.
+**MSc Thesis Project**
+
+**Author:** Yashkumar Vala  
+**Programme:** MSc Data Science, AI, and Digital Business  
+**University:** GISMA University of Applied Sciences  
+**Supervisor:** Prof. William Baker Morrison
+
+---
 
 ## Overview
 
-MAGPIE is a bias detection model that was trained only on English data. This project tests whether it can still detect bias in German news, at the article level, without ever being trained on German (this is called zero-shot cross-lingual transfer).
+This repository contains the code and analysis notebooks for the MSc thesis **“Zero-Shot Cross-Lingual Media Bias Detection: Applying MAGPIE to German News at the Article Level.”**
 
-MAGPIE only gives a prediction for each sentence on its own. But the datasets used here only have labels at the article level (or outlet level), not per sentence. So this project also tests two ways of turning many sentence scores into one article-level score: average pooling and max pooling. Both come from the Multiple Instance Learning literature.
+The project investigates whether **MAGPIE**, a multi-task media bias detection model trained on English data, can transfer its bias-detection ability to German news articles without German-language fine-tuning.
 
-## Datasets
+As MAGPIE produces sentence-level predictions, several pooling strategies are evaluated to obtain article-level scores.
 
-- **German (target dataset):** a sample from the corpus introduced by España-Bonet (2023), German news articles labelled left or right by the outlet's known political lean.
-- **BABE (comparison, English):** the dataset MAGPIE was fine-tuned on. Used as a sanity check on the pipeline, not as independent evidence.
-- **SemEval-2019 Task 4, Hyperpartisan News Detection (comparison, English):** human-annotated hyperpartisan or not labels, confirmed to not be part of MAGPIE's training data. Used as an independent English benchmark.
+---
 
-## Repository structure
+## Research Question
+
+> **Does MAGPIE, a multi-task bias detection model trained only on English, transfer its bias-detection ability to German news at the article level without any German-language fine-tuning?**
+
+---
+
+## Repository Structure
 
 ```
-notebooks/       Analysis notebooks (German, BABE, SemEval — one per dataset)
-data/             (not included, see Data Availability below)
-results/          Output tables and statistics from each notebook
+MAGPIE-German-Bias-Transfer/
+│
+├── README.md
+│
+├── 01_german_analysis.ipynb
+│   └── Main German transfer analysis
+│
+├── 02_babe_analysis.ipynb
+│   └── BABE pipeline sanity check
+│
+├── 03_semeval_analysis.ipynb
+│   └── SemEval-2019 English comparison
+│
+├── 04_spanish_analysis.ipynb
+│   └── Spanish replication analysis
+│
+├── 05_topic_modelling.ipynb
+│   └── BERTopic and topic-controlled analysis
+│
+└── 06_outlet_genre_baseline.ipynb
+    └── Outlet, genre, and SentiWS analysis
 ```
+Each notebook is self-contained and includes its own data loading, model scoring, statistical analysis, and explanatory markdown.
 
-## Method summary
+⸻
 
-For each dataset: articles were split into sentences, scored with MAGPIE, and aggregated to the article level using average and max pooling. Groups (e.g. left vs right) were then compared using the Mann-Whitney U test. Article length was checked throughout as a possible confound, using correlation, OLS regression, and a length-matched subsample, with Bonferroni correction applied where multiple tests were run on the same data.
+Methodology
 
-## Data availability
+The analysis uses MAGPIE sentence-level predictions and aggregates them to the article level using:
 
-The España-Bonet (2023) and BABE datasets are third-party research datasets and are not included in this repository. See the original papers for access. The SemEval-2019 Task 4 dataset is available via Zenodo (record 5776081).
 
-## Reproducibility
+* Continuous average
+* Hard-label average
+* Maximum
+* Median
+* Top-3
+* Top-5
 
-All experiments were run in Google Colab on a T4 GPU. Main packages used: transformers, pandas, scipy, statsmodels. A fixed random seed (42) was used for the German sample so the results can be reproduced.
+Additional analyses examine:
+
+* Article-length effects
+* Length-controlled comparisons
+* Outlet-level clustering
+* Cluster-robust inference
+* HC3 robust standard errors
+* Bonferroni correction
+* Topic effects
+* SentiWS-based lexical analysis
+
+⸻
+
+Datasets
+
+The project uses the following datasets and resources:
+
+Dataset / Resource
+
+Purpose
+
+España-Bonet (2023)
+
+German and Spanish news analysis
+
+BABE
+
+MAGPIE pipeline sanity check
+
+SemEval-2019 Task 4
+
+Independent English comparison
+
+SentiWS
+
+German sentiment lexicon baseline
+
+Third-party datasets are not included in this repository. They should be obtained from their original sources in accordance with their respective licenses and attribution requirements.
+
+⸻
+
+Key Findings
+
+The primary German analysis does not provide reliable evidence of a general article-level left/right distinction in MAGPIE scores once article length and outlet clustering are taken into account.
+
+The Spanish analysis provides mixed evidence.
+
+Additional analyses suggest that MAGPIE’s German outputs may be more strongly associated with subjectivity, evaluative language, and topic composition than with outlet-level political stance alone.
+
+For the complete statistical results and interpretation, please refer to the MSc thesis.
+
+⸻
+
+Requirements
+
+The notebooks were developed and executed using Google Colab.
+
+Main Python libraries include:
+
+* transformers
+* pandas
+* numpy
+* scipy
+* statsmodels
+* bertopic
+* datasets
+* sentence-transformers
+
+⸻
+
+How to Run
+
+1. Clone or download this repository.
+2. Open the required notebook in Google Colab.
+3. Install the dependencies specified in the notebook.
+4. Obtain the required third-party datasets.
+5. Place the datasets in the expected locations or update the relevant paths.
+6. Run the notebook sequentially.
+
+⸻
+
+Reproducibility
+
+A fixed random seed of 42 was used for sampling.
+
+The German analysis also saves a standalone CSV containing the sampled article oscarID, URL, and stance label.
+
+The notebooks contain the relevant preprocessing and corpus-reading procedures required to reproduce the analyses.
+
+⸻
+
+Thesis
+
+Title:
+Zero-Shot Cross-Lingual Media Bias Detection: Applying MAGPIE to German News at the Article Level
+
+Author: Yashkumar Vala
+Programme: MSc Data Science, AI, and Digital Business
+University: GISMA University of Applied Sciences
+Supervisor: Prof. William Baker Morrison
