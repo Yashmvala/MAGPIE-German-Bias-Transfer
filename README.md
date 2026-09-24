@@ -54,7 +54,7 @@ Each notebook is self-contained and includes its own data loading, model scoring
 
 ⸻
 
-Methodology
+## Methodology
 
 The analysis uses MAGPIE sentence-level predictions and aggregates them to the article level using:
 
@@ -66,7 +66,7 @@ The analysis uses MAGPIE sentence-level predictions and aggregates them to the a
 * Top-3
 * Top-5
 
-Additional analyses examine:
+## Additional analyses examine:
 
 * Article-length effects
 * Length-controlled comparisons
@@ -98,7 +98,7 @@ Used as a German sentiment lexicon baseline.
 Third-party datasets are not included in this repository. They should be obtained from their original sources in accordance with their respective licenses and attribution requirements.
 ⸻
 
-Key Findings
+## Key Findings
 
 The primary German analysis does not provide reliable evidence of a general article-level left/right distinction in MAGPIE scores once article length and outlet clustering are taken into account.
 
@@ -110,7 +110,7 @@ For the complete statistical results and interpretation, please refer to the MSc
 
 ⸻
 
-Requirements
+## Requirements
 
 The notebooks were developed and executed using Google Colab.
 
@@ -127,7 +127,7 @@ Main Python libraries include:
 
 ⸻
 
-How to Run
+## How to Run
 
 1. Clone or download this repository.
 2. Open the required notebook in Google Colab.
@@ -138,7 +138,7 @@ How to Run
 
 ⸻
 
-Reproducibility
+## Reproducibility
 
 A fixed random seed of 42 was used for sampling.
 
@@ -148,7 +148,7 @@ The notebooks contain the relevant preprocessing and corpus-reading procedures r
 
 ⸻
 
-Thesis
+## Thesis
 
 Title:
 Zero-Shot Cross-Lingual Media Bias Detection: Applying MAGPIE to German News at the Article Level
