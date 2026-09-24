@@ -79,32 +79,23 @@ Additional analyses examine:
 
 ⸻
 
-Datasets
+## Datasets
 
 The project uses the following datasets and resources:
 
-Dataset / Resource
+### España-Bonet (2023)
+Used for the German and Spanish news analyses.
 
-Purpose
+### BABE
+Used as a sanity check for the MAGPIE scoring and analysis pipeline.
 
-España-Bonet (2023)
+### SemEval-2019 Task 4
+Used as an independent English comparison dataset.
 
-German and Spanish news analysis
-
-BABE
-
-MAGPIE pipeline sanity check
-
-SemEval-2019 Task 4
-
-Independent English comparison
-
-SentiWS
-
-German sentiment lexicon baseline
+### SentiWS
+Used as a German sentiment lexicon baseline.
 
 Third-party datasets are not included in this repository. They should be obtained from their original sources in accordance with their respective licenses and attribution requirements.
-
 ⸻
 
 Key Findings
